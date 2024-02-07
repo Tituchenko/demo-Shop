@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Магазин</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div class="container">
+<h1>Магазин</h1>
+
+<h2>Баланс пользователя: <span th:text="${user.balance}"></span></h2>
+<h2>Баланс магазина: <span th:text="${shop.balance}"></span></h2>
+
+<table>
+  <tr>
+    <th>Название</th>
+    <th>Цена</th>
+    <th>Количество</th>
+    <th>Зарезервировано</th>
+    <th>Действия</th>
+  </tr>
+  <tr th:each="product : ${products}">
+
+      <td th:text="${product.name}"></td>
+      <td th:text="${product.price}"></td>
+      <td th:text="${product.amount}"></td>
+      <td th:text="${product.reserved}"></td>
+      <td>
+        <form action="/buy" method="post">
+            <input type="hidden" th:value="${product.id}" name="id">
+         Количество: <input type="number" name="amount">
+
+        <button type="submit">Купить</button>
+        </form>
+      </td>
+
+  </tr>
+</table>
+</div>
+</body>
+</html>
